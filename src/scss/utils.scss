@@ -14,7 +14,8 @@ $main-font: "Roboto", sans-serif;
 $title-font: "Gotham Pro", sans-serif;
 
 // colors
-:root {
+// css переменные для возможности впилить темизацию
+body {
 	--color-main: hsl(269, 90%, 55%);
 	--color-main-hover: hsl(270, 76%, 44%);
 	--color-main-active: hsl(269, 78%, 32%);

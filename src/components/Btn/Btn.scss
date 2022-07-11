@@ -1,0 +1,21 @@
+.btn {
+	background: var(--color-main);
+	color: var(--color-background);
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 150%;
+	border-radius: 6px;
+	padding: 16px 20px;
+	min-width: 225px;
+	min-height: 56px;
+	transition: background 250ms ease-in-out;
+
+	&:hover,
+	&:focus {
+		background: var(--color-main-hover);
+	}
+
+	&:active {
+		background: var(--color-main-active);
+	}
+}
