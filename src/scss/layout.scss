@@ -14,6 +14,19 @@ body {
 	line-height: 1.4;
 	background: var(--color-background);
 	color: var(--color-text);
+
+	// colors
+	// css переменные для возможности впилить темизацию
+	--color-main: hsl(269, 90%, 55%);
+	--color-main-hover: hsl(270, 76%, 44%);
+	--color-main-active: hsl(269, 78%, 32%);
+	--color-text: hsl(248, 61%, 7%, 1);
+	--color-text-grey: hsl(247, 5%, 63%);
+	--color-background: hsl(0, 0%, 100%);
+	--color-background-grey: hsl(210, 25%, 97%);
+	--color-border: hsl(220, 14%, 92%);
+	--color-success: hsl(115, 63%, 43%);
+	--color-warning: hsl(3, 63%, 43%);
 }
 
 h1,

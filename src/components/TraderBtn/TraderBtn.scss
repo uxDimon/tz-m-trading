@@ -1,0 +1,52 @@
+@import "../../scss/utils.scss";
+
+.trader-btn {
+	font-family: $main-font;
+	background: var(--color-background);
+	border-radius: 25px;
+	padding: 20px 24px;
+	transition: background 250ms ease-in-out;
+
+	&._active {
+		background: hsl(210, 25%, 97%);
+	}
+}
+
+.trader-btn__img {
+	display: block;
+	width: 48px;
+	height: 48px;
+	border-radius: 48px;
+	object-fit: cover;
+	background: var(--color-text-grey);
+	margin-right: 16px;
+}
+
+.trader-btn__wrap {
+	display: grid;
+	grid-auto-flow: row;
+	justify-items: start;
+	grid-row-gap: 4px;
+}
+
+.trader-btn__name {
+	font-weight: 500;
+	font-size: 20px;
+	line-height: 1.4;
+	color: var(--color-text);
+}
+
+.trader-btn__monthly-profit {
+	font-weight: 500;
+	font-size: 20px;
+	line-height: 1.4;
+	color: var(--color-success);
+
+	&._grey {
+		color: var(--color-text-grey);
+	}
+
+	&._read {
+		color: var(--color-warning);
+	}
+}
