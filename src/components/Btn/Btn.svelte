@@ -1,12 +1,9 @@
 <script>
 	import "./Btn.scss";
 
-	export let text = "¯\\_(ツ)_/¯",
-		onClick = () => {
-			return false;
-		};
+	export let className = null;
 </script>
 
-<button class="btn" on:click={onClick}>
-	{text}
+<button class="btn {className}" on:click>
+	<slot>¯\_(ツ)_/¯</slot>
 </button>

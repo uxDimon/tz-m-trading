@@ -1,54 +1,76 @@
 <script>
 	import "./App.scss";
+	import { traderList } from "./stores.js";
+
 	import Btn from "./components/Btn/Btn.svelte";
 	import TraderBtn from "./components/TraderBtn/TraderBtn.svelte";
 
-	import json from "./input.json";
+	// Список трейдеров
+	let traderListValue = [];
 
-	// Рандомные 4 ключа для json
-	const randomKey = [];
+	const unsubscribe = traderList.subscribe((value) => {
+		traderListValue = value;
+	});
 
-	const getRandom = (max) => {
-			return Math.floor(Math.random() * (max + 1));
-		},
-		pushRandomNumber = (max, keyList) => {
-			// если max будет меньше чем итераций то будет ошибочка(
-			const randomNumber = getRandom(max);
+	console.log(traderListValue);
 
-			const isRepeat = keyList.every((item) => {
-				return randomNumber !== item;
-			});
+	// Переключение трейдеров
+	let activeIndex = 0;
+	$: activeTrader = traderListValue[activeIndex];
 
-			if (isRepeat) {
-				keyList.push(randomNumber);
-			} else {
-				pushRandomNumber(max, keyList);
+	const traderChoose = (index = 0) => {
+		for (const item of traderListValue) {
+			if (item.isActive) {
+				item.isActive = false;
+				break;
 			}
-		};
+		}
+		traderListValue[index].isActive = true;
+		activeIndex = index;
+	};
 
-	for (let index = 0; index < 4; index++) {
-		pushRandomNumber(json.length, randomKey);
-	}
+	traderChoose();
 
-	console.log(randomKey);
-
-	//
-	const traderList = [];
-
-	const btn = {
-		index: 1,
-		monthlyProfit: -233.23,
-		name: "Crystal Williams",
-		img: "https://flagcdn.com/h40/in.png",
-		isActive: false,
+	// Copy Now
+	const copyNow = () => {
+		console.info(activeTrader);
 	};
 </script>
 
-<main class="app">
-	<h1 class="app__title">Copy the best masters</h1>
-	<ul class="app__trader-list">
-		<li class="app__trader-list__item">
-			<TraderBtn {...btn} className="app__trader-list__btn" />
-		</li>
-	</ul>
-</main>
+<div class="block app">
+	<div class="block__wrap app__wrap">
+		<h1 class="app__title">Copy the best masters</h1>
+		<div class="app__body">
+			<ul class="app__trader-list">
+				{#each traderListValue as item, index ("trader_" + index)}
+					<li class="app__trader-list__item">
+						<TraderBtn
+							on:click={() => traderChoose(index)}
+							options={item}
+							index={index + 1}
+							className="app__trader-list__btn"
+						/>
+					</li>
+				{/each}
+			</ul>
+
+			<div class="app__info">
+				<div class="app__info__head">
+					<div class="app__info__numbers">
+						<span class="app__info__numbers__name">Monthly profit</span>
+						<span class="app__info__numbers__vaslue">{activeTrader.monthly_profit} %</span>
+					</div>
+					<div class="app__info__numbers">
+						<span class="app__info__numbers__name">Total profit</span>
+						<span class="app__info__numbers__vaslue">{activeTrader.total_profit} %</span>
+					</div>
+					<div class="app__info__numbers">
+						<span class="app__info__numbers__name">In management</span>
+						<span class="app__info__numbers__vaslue">{activeTrader.capital} USD</span>
+					</div>
+					<Btn on:click={copyNow} className="app__info__btn">Copy Now</Btn>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

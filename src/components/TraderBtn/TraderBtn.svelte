@@ -2,16 +2,16 @@
 	import "./TraderBtn.scss";
 
 	export let index = 0,
-		isActive = false,
-		name = "Name unknown",
-		monthlyProfit = null,
-		img = null,
-		className = null,
-		onClick = () => {
-			return false;
-		};
+		options = {
+			flag: null,
+			monthly_profit: null,
+			name: "Name unknown",
+			isActive: false,
+		},
+		className = null;
 
-	let profitClassName = "";
+	let profitClassName = "",
+		monthlyProfit = options.monthly_profit;
 
 	if (monthlyProfit === null) {
 		profitClassName = "_grey";
@@ -24,10 +24,10 @@
 	}
 </script>
 
-<button class="trader-btn {className}" class:_active={isActive} title={name} on:click={onClick}>
-	<img src={img} alt={name} class="trader-btn__img" />
+<button class="trader-btn {className}" class:_active={options.isActive} title={options.name} on:click>
+	<img src={options.flag} alt={options.name} class="trader-btn__img" />
 	<div class="trader-btn__wrap">
-		<span class="trader-btn__name">{index + ". " + name}</span>
+		<span class="trader-btn__name">{index + ". " + options.name}</span>
 		<span class="trader-btn__monthly-profit {profitClassName}">{monthlyProfit}</span>
 	</div>
 </button>
