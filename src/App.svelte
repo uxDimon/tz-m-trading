@@ -1,10 +1,15 @@
 <script>
 	import "./App.scss";
+	import "swiper/css/bundle";
+	import { Pagination } from "swiper";
+	import { Swiper, SwiperSlide } from "swiper/svelte";
+
 	import { traderList } from "./stores.js";
 
 	import Btn from "./components/Btn/Btn.svelte";
 	import TraderBtn from "./components/TraderBtn/TraderBtn.svelte";
 	import ChartDesctop from "./components/ChartDesctop/ChartDesctop.svelte";
+	import ChartMobail from "./components/ChartMobail/ChartMobail.svelte";
 
 	// Список трейдеров
 	let traderListValue = [];
@@ -30,10 +35,7 @@
 
 	traderChoose();
 
-	// Copy Now
-	const copyNow = () => {
-		console.info(activeTrader);
-	};
+	let slider;
 </script>
 
 <div class="block app">
@@ -67,11 +69,34 @@
 						<span class="app__info__numbers__name">In management</span>
 						<span class="app__info__numbers__vaslue">{activeTrader.capital} USD</span>
 					</div>
-					<Btn on:click={copyNow} className="app__info__btn">Copy Now</Btn>
+					<Btn on:click={() => console.info(activeTrader)} className="app__info__btn">Copy Now</Btn>
 				</div>
 
 				<ChartDesctop data={activeTrader.chart} className="app__info__chart" />
 			</div>
 		</div>
+
+		<Swiper class="app__slider" modules={[Pagination]} spaceBetween={20} pagination={{ clickable: true }}>
+			{#each traderListValue as item, index ("trader_" + index)}
+				<SwiperSlide class="app__slider__slide">
+					<TraderBtn options={item} index={index + 1} className="app__slider__btn" />
+
+					<div class="app__slider__numbers">
+						<div class="app__info__numbers">
+							<span class="app__info__numbers__name">Monthly profit</span>
+							<span class="app__info__numbers__vaslue">{item.monthly_profit} %</span>
+						</div>
+						<div class="app__info__numbers">
+							<span class="app__info__numbers__name">Total profit</span>
+							<span class="app__info__numbers__vaslue">{item.total_profit} %</span>
+						</div>
+					</div>
+
+					<ChartMobail data={item.chart} className="app__slider__chart" />
+
+					<Btn on:click={() => console.info(item)} className="app__slider__btn">Copy Now</Btn>
+				</SwiperSlide>
+			{/each}
+		</Swiper>
 	</div>
 </div>

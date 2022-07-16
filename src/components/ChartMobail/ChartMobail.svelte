@@ -2,27 +2,35 @@
 	import { Chart, AreaSeries } from "svelte-lightweight-charts";
 
 	export let data = [],
-		width = 800,
-		height = 280,
+		width = 280,
+		height = 100,
 		className = "";
 
 	const options = {
 			width: width,
 			height: height,
+
 			timeScale: {
-				barSpacing: 19,
-				borderColor: "#DDE0E9",
+				barSpacing: 7,
+				visible: false,
 			},
 			rightPriceScale: {
-				borderColor: "#DDE0E9",
+				visible: false,
+			},
+			crosshair: {
+				vertLine: {
+					visible: false,
+					labelVisible: false,
+				},
+				horzLine: {
+					visible: false,
+					labelVisible: false,
+				},
 			},
 		},
 		theme = {
 			chart: {
 				layout: {
-					fontFamily: "Roboto, sans-serif",
-					fontSize: 16,
-					textColor: "#D9D9D9",
 					backgroundColor: "#FFFFFF",
 					lineColor: "#DDE0E9",
 				},
@@ -42,24 +50,13 @@
 				topColor: "rgba(0, 0, 0, 0)",
 				bottomColor: "rgba(0, 0, 0, 0)",
 				lineColor: "#8A24F3",
+				crosshairMarkerVisible: false,
+				lastValueVisible: false,
+				priceLineVisible: false,
 			},
 		};
-
-	let observer;
-	let handleContainerReference = (element) => {
-		if (observer) {
-			observer.disconnect();
-		}
-		if (!element) {
-			return;
-		}
-		observer = new ResizeObserver(([entry]) => {
-			options.width = entry.contentRect.width;
-		});
-		observer.observe(element);
-	};
 </script>
 
-<Chart {...options} {...theme.chart} container={{ class: className, ref: handleContainerReference }}>
-	<AreaSeries {data} reactive={true} {...theme.series} />
+<Chart {...options} {...theme.chart} container={{ class: className }}>
+	<AreaSeries {data} {...theme.series} />
 </Chart>
