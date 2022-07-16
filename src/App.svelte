@@ -4,6 +4,7 @@
 
 	import Btn from "./components/Btn/Btn.svelte";
 	import TraderBtn from "./components/TraderBtn/TraderBtn.svelte";
+	import ChartDesctop from "./components/ChartDesctop/ChartDesctop.svelte";
 
 	// Список трейдеров
 	let traderListValue = [];
@@ -11,8 +12,6 @@
 	const unsubscribe = traderList.subscribe((value) => {
 		traderListValue = value;
 	});
-
-	console.log(traderListValue);
 
 	// Переключение трейдеров
 	let activeIndex = 0;
@@ -70,6 +69,8 @@
 					</div>
 					<Btn on:click={copyNow} className="app__info__btn">Copy Now</Btn>
 				</div>
+
+				<ChartDesctop data={activeTrader.chart} className="app__info__chart" />
 			</div>
 		</div>
 	</div>
