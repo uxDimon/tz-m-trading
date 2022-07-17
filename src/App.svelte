@@ -35,7 +35,7 @@
 
 	traderChoose();
 
-	let clientWidth;
+	let clientWidth = window.innerWidth;
 	window.addEventListener("resize", () => {
 		clientWidth = window.innerWidth;
 	});

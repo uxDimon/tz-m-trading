@@ -21,5 +21,5 @@ npm run build
 Проверить сборку
 
 ```console
-npm run serve
+npm run preview
 ```
