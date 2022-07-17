@@ -60,6 +60,76 @@
 	width: 100%;
 }
 
+.swiper.app__slider {
+	margin-right: -$block-padding-hor-m;
+	margin-left: -$block-padding-hor-m;
+	padding: 0 $block-padding-hor-m 28px;
+	width: 100vw;
+
+	.swiper-pagination {
+		position: static;
+		margin-top: 20px;
+
+		.swiper-pagination-bullet {
+			width: 8px;
+			height: 8px;
+			border-radius: 8px;
+			background: hsl(225, 21%, 89%);
+			transition: 200ms ease-in-out;
+			opacity: 1;
+			transition-property: background, width;
+
+			&.swiper-pagination-bullet-active {
+				width: 20px;
+				background: hsl(240, 13%, 81%);
+			}
+		}
+	}
+}
+
+.app__slider__slide {
+	display: flex;
+	justify-content: center;
+}
+
+.app__slider__wrap {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	border: 1px solid var(--color-border);
+	border-radius: 12px;
+	padding: 24px;
+	width: 100%;
+	max-width: 430px;
+}
+
+.trader-btn.app__slider__btn {
+	width: 100%;
+	padding: 0;
+	margin-bottom: 20px;
+
+	&._active {
+		background: transparent;
+	}
+}
+
+.app__slider__numbers {
+	width: 100%;
+	display: flex;
+	gap: 36px;
+	margin-bottom: 32px;
+}
+
+.app__slider__chart {
+	max-width: 100%;
+	margin-bottom: 32px;
+	pointer-events: none;
+}
+
+.btn.app__slider__btn {
+	width: 100%;
+}
+
 @media screen and (max-width: 1100px) {
 	.app__info__head {
 		gap: 12px;
@@ -87,5 +157,12 @@
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
 		grid-column: 24px;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.app__title {
+		font-size: 28px;
+		margin-bottom: 20px;
 	}
 }

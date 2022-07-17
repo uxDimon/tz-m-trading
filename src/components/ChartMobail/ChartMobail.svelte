@@ -55,8 +55,22 @@
 				priceLineVisible: false,
 			},
 		};
+
+	let observer;
+	let handleContainerReference = (element) => {
+		if (observer) {
+			observer.disconnect();
+		}
+		if (!element) {
+			return;
+		}
+		observer = new ResizeObserver(([entry]) => {
+			options.width = entry.contentRect.width;
+		});
+		observer.observe(element);
+	};
 </script>
 
-<Chart {...options} {...theme.chart} container={{ class: className }}>
+<Chart {...options} {...theme.chart} container={{ class: className, ref: handleContainerReference }}>
 	<AreaSeries {data} {...theme.series} />
 </Chart>
